@@ -5,27 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> AI Rhetorica | Ingeniería de la Persuasión Jurídica</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Inter:wght@300;400;600&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'primary-dark': '#0A192F', // Azul marino profundo
-                        'secondary-gold': '#D4AF37', // Dorado sofisticado
-                        'neutral-light': '#F4F4F9', // Gris claro de fondo
+                        'primary-dark': '#0A192F',
+                        'secondary-gold': '#D4AF37',
+                        'neutral-light': '#F4F4F9',
                         'text-gray': '#333333',
                     },
                     fontFamily: {
-                        serif: ['Lora', 'serif'], // Para autoridad y tradición
-                        sans: ['Inter', 'sans-serif'], // Para modernidad y claridad
+                        serif: ['Lora', 'serif'],
+                        // Ensure Inter and Noto Sans TC are prioritized
+                        sans: ['Inter', 'Noto Sans TC', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Efecto de elevación al pasar el ratón */
+        /* Utility styles */
         .hover-lift {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -33,19 +34,64 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
+
+        /* Language Switching Logic (CSS) */
+        /* Hide elements that do not match the active language class on the body */
+        /* This approach ensures that only the active language is displayed. */
+        body.lang-active-es .lang:not(.lang-es),
+        body.lang-active-en .lang:not(.lang-en),
+        body.lang-active-zh .lang:not(.lang-zh) {
+            display: none;
+        }
+
+        /* Style for active language button */
+        .lang-btn.active {
+            color: #0A192F; /* primary-dark */
+            background-color: #F4F4F9; /* neutral-light */
+            font-weight: 600;
+        }
     </style>
 </head>
-<body class="font-sans bg-neutral-light text-text-gray antialiased">
+<body class="font-sans bg-neutral-light text-text-gray antialiased lang-active-es">
 
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-serif font-bold text-primary-dark">AI Rhetorica</a>
-            <nav class="space-x-6 hidden md:flex">
-                <a href="#problem" class="text-gray-600 hover:text-secondary-gold transition duration-300">El Desafío</a>
-                <a href="#solution" class="text-gray-600 hover:text-secondary-gold transition duration-300">La Solución</a>
-                <a href="#services" class="text-gray-600 hover:text-secondary-gold transition duration-300">Servicios</a>
-                <a href="#methodology" class="text-gray-600 hover:text-secondary-gold transition duration-300">Metodología</a>
-                <a href="#contact" class="bg-secondary-gold text-primary-dark px-4 py-2 rounded-md hover:bg-opacity-90 transition duration-300">Consultar</a>
+            <a href="#" class="text-2xl font-serif font-bold text-primary-dark">
+                AI Rhetorica
+            </a>
+            <nav class="flex items-center space-x-6">
+                <div class="space-x-6 hidden md:flex">
+                    <a href="#problem" class="text-gray-600 hover:text-secondary-gold transition duration-300">
+                        <span class="lang lang-es">El Desafío</span>
+                        <span class="lang lang-en">The Challenge</span>
+                        <span class="lang lang-zh">挑戰</span>
+                    </a>
+                    <a href="#solution" class="text-gray-600 hover:text-secondary-gold transition duration-300">
+                        <span class="lang lang-es">La Solución</span>
+                        <span class="lang lang-en">The Solution</span>
+                        <span class="lang lang-zh">解決方案</span>
+                    </a>
+                    <a href="#services" class="text-gray-600 hover:text-secondary-gold transition duration-300">
+                        <span class="lang lang-es">Servicios</span>
+                        <span class="lang lang-en">Services</span>
+                        <span class="lang lang-zh">服務項目</span>
+                    </a>
+                    <a href="#methodology" class="text-gray-600 hover:text-secondary-gold transition duration-300">
+                        <span class="lang lang-es">Metodología</span>
+                        <span class="lang lang-en">Methodology</span>
+                        <span class="lang lang-zh">方法論</span>
+                    </a>
+                    <a href="#contact" class="bg-secondary-gold text-primary-dark px-4 py-2 rounded-md hover:bg-opacity-90 transition duration-300">
+                        <span class="lang lang-es">Consultar</span>
+                        <span class="lang lang-en">Consult</span>
+                        <span class="lang lang-zh">諮詢</span>
+                    </a>
+                </div>
+                <div class="flex space-x-2 ml-6 border-l pl-6">
+                    <button id="btn-es" onclick="switchLanguage('es')" class="lang-btn text-gray-600 hover:text-secondary-gold transition duration-300 focus:outline-none px-2 py-1 rounded">ES</button>
+                    <button id="btn-en" onclick="switchLanguage('en')" class="lang-btn text-gray-600 hover:text-secondary-gold transition duration-300 focus:outline-none px-2 py-1 rounded">EN</button>
+                    <button id="btn-zh" onclick="switchLanguage('zh')" class="lang-btn text-gray-600 hover:text-secondary-gold transition duration-300 focus:outline-none px-2 py-1 rounded">繁體</button>
+                </div>
             </nav>
         </div>
     </header>
@@ -54,33 +100,76 @@
         <section class="bg-primary-dark text-white py-24">
             <div class="container mx-auto px-6 text-center">
                 <h1 class="text-5xl md:text-6xl font-serif font-bold mb-6">
-                    El Arte de la Persuasión. <span class="text-secondary-gold">Ingeniería de Precisión.</span>
+                    <span class="lang lang-es">El Arte de la Persuasión.</span>
+                    <span class="lang lang-en">The Art of Persuasion.</span>
+                    <span class="lang lang-zh">說服的藝術。</span>
+                    <span class="text-secondary-gold">
+                        <span class="lang lang-es">Ingeniería de Precisión.</span>
+                        <span class="lang lang-en">Precision Engineering.</span>
+                        <span class="lang lang-zh">精準的工程。</span>
+                    </span>
                 </h1>
                 <p class="text-xl mb-8 font-light max-w-3xl mx-auto">
-                    En litigios de alto riesgo, la victoria no depende solo de la ley, sino de la maestría en la argumentación. Fusionamos la retórica clásica con la IA más avanzada para crear escritos jurídicos de una fuerza persuasiva inigualable.
+                    <span class="lang lang-es">En litigios de alto riesgo, la victoria no depende solo de la ley, sino de la maestría en la argumentación. Fusionamos la retórica clásica con la IA más avanzada para crear escritos jurídicos de una fuerza persuasiva inigualable.</span>
+                    <span class="lang lang-en">In high-stakes litigation, victory depends not only on the law, but on mastery of argumentation. We merge classical rhetoric with advanced AI to create legal briefs of unparalleled persuasive force.</span>
+                    <span class="lang lang-zh">在高風險訴訟中，勝利不僅取決於法律，更取決於論證的掌握。我們將古典修辭學與最先進的AI相結合，打造出具有無與倫比說服力的法律文書。</span>
                 </p>
-                <a href="#contact" class="bg-secondary-gold text-primary-dark px-8 py-3 rounded-full font-semibold text-lg hover:bg-opacity-90 transition duration-300">Solicitar Análisis Confidencial</a>
+                <a href="#contact" class="bg-secondary-gold text-primary-dark px-8 py-3 rounded-full font-semibold text-lg hover:bg-opacity-90 transition duration-300">
+                    <span class="lang lang-es">Solicitar Análisis Confidencial</span>
+                    <span class="lang lang-en">Request Confidential Analysis</span>
+                    <span class="lang lang-zh">申請機密分析</span>
+                </a>
             </div>
         </section>
 
         <section id="problem" class="py-20">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-serif font-bold text-center mb-6 text-primary-dark">El Desafío: La "Media Gris" de la IA Legal</h2>
+                <h2 class="text-3xl font-serif font-bold text-center mb-6 text-primary-dark">
+                    <span class="lang lang-es">El Desafío: La "Media Gris" de la IA Legal</span>
+                    <span class="lang lang-en">The Challenge: The "Gray Average" of Legal AI</span>
+                    <span class="lang lang-zh">挑戰：法律AI的「灰色平均值」</span>
+                </h2>
                 <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-                    Las herramientas de IA generativa estándar producen textos correctos, pero genéricos. En la élite jurídica, la homogeneización de los argumentos es una desventaja estratégica.
+                    <span class="lang lang-es">Las herramientas de IA generativa estándar producen textos correctos, pero genéricos. En la élite jurídica, la homogeneización de los argumentos es una desventaja estratégica.</span>
+                    <span class="lang lang-en">Standard generative AI tools produce correct, yet generic text. In the legal elite, the homogenization of arguments is a strategic disadvantage.</span>
+                    <span class="lang lang-zh">標準的生成式AI工具能產生正確但通用的文本。在法律精英階層，論點的同質化是一種戰略劣勢。</span>
                 </p>
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="bg-white p-6 rounded-lg shadow-lg hover-lift">
-                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">Falta de Sofisticación Retórica</h3>
-                        <p class="text-gray-600">Los modelos actuales carecen de la sutileza necesaria para navegar la complejidad de la persuasión en Tribunales Supremos o Arbitrajes Internacionales.</p>
+                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">
+                            <span class="lang lang-es">Falta de Sofisticación Retórica</span>
+                            <span class="lang lang-en">Lack of Rhetorical Sophistication</span>
+                            <span class="lang lang-zh">缺乏精妙的修辭</span>
+                        </h3>
+                        <p class="text-gray-600">
+                            <span class="lang lang-es">Los modelos actuales carecen de la sutileza necesaria para navegar la complejidad de la persuasión en Tribunales Supremos o Arbitrajes Internacionales.</span>
+                            <span class="lang lang-en">Current models lack the subtlety required to navigate the complexity of persuasion in Supreme Courts or International Arbitration.</span>
+                            <span class="lang lang-zh">當前的模型缺乏在最高法院或國際仲裁中駕馭複雜說服所需的精妙之處。</span>
+                        </p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-lg hover-lift">
-                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">Argumentos Superficiales</h3>
-                        <p class="text-gray-600">La IA tiende a la eficiencia sobre la profundidad, fallando en construir razonamientos complejos y anticipar contraargumentos de manera efectiva.</p>
+                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">
+                            <span class="lang lang-es">Argumentos Superficiales</span>
+                            <span class="lang lang-en">Superficial Arguments</span>
+                            <span class="lang lang-zh">膚淺的論證</span>
+                        </h3>
+                        <p class="text-gray-600">
+                            <span class="lang lang-es">La IA tiende a la eficiencia sobre la profundidad, fallando en construir razonamientos complejos y anticipar contraargumentos de manera efectiva.</span>
+                            <span class="lang lang-en">AI tends towards efficiency over depth, failing to construct complex reasoning and anticipate counterarguments effectively.</span>
+                            <span class="lang lang-zh">AI傾向於效率而非深度，無法有效地構建複雜的推理和預測反駁論點。</span>
+                        </p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-lg hover-lift">
-                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">Pérdida de Voz Única</h3>
-                        <p class="text-gray-600">El uso generalizado de las mismas herramientas diluye la voz y el estilo distintivo que define a los grandes letrados.</p>
+                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">
+                            <span class="lang lang-es">Pérdida de Voz Única</span>
+                            <span class="lang lang-en">Loss of Unique Voice</span>
+                            <span class="lang lang-zh">喪失獨特的聲音</span>
+                        </h3>
+                        <p class="text-gray-600">
+                            <span class="lang lang-es">El uso generalizado de las mismas herramientas diluye la voz y el estilo distintivo que define a los grandes letrados.</span>
+                            <span class="lang lang-en">The widespread use of the same tools dilutes the distinctive voice and style that defines great lawyers.</span>
+                            <span class="lang lang-zh">廣泛使用相同的工具稀釋了定義偉大律師的獨特聲音和風格。</span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -88,9 +177,15 @@
 
         <section id="solution" class="py-20 bg-white">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-serif font-bold text-center mb-6 text-primary-dark">La Solución: Ingeniería Retórica</h2>
+                <h2 class="text-3xl font-serif font-bold text-center mb-6 text-primary-dark">
+                    <span class="lang lang-es">La Solución: Ingeniería Retórica</span>
+                    <span class="lang lang-en">The Solution: Rhetorical Engineering</span>
+                    <span class="lang lang-zh">解決方案：修辭工程學</span>
+                </h2>
                 <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-                    Nuestra metodología une lo mejor de dos mundos: la precisión analítica de la filología clásica y la potencia de procesamiento de la Inteligencia Artificial.
+                    <span class="lang lang-es">Nuestra metodología une lo mejor de dos mundos: la precisión analítica de la filología clásica y la potencia de procesamiento de la Inteligencia Artificial.</span>
+                    <span class="lang lang-en">Our methodology unites the best of two worlds: the analytical precision of classical philology and the processing power of Artificial Intelligence.</span>
+                    <span class="lang lang-zh">我們的方法論結合了兩個領域的精華：古典語言學的分析精準性與人工智能的處理能力。</span>
                 </p>
 
                 <div class="flex flex-col md:flex-row items-center justify-center gap-12">
@@ -98,8 +193,16 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-secondary-gold mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
-                        <h3 class="text-xl font-semibold">Filología Clásica</h3>
-                        <p class="text-sm text-gray-500">Maestría en Retórica, Hermenéutica y Estructura Lógica.</p>
+                        <h3 class="text-xl font-semibold">
+                            <span class="lang lang-es">Filología Clásica</span>
+                            <span class="lang lang-en">Classical Philology</span>
+                            <span class="lang lang-zh">古典語言學</span>
+                        </h3>
+                        <p class="text-sm text-gray-500">
+                            <span class="lang lang-es">Maestría en Retórica, Hermenéutica y Estructura Lógica.</span>
+                            <span class="lang lang-en">Mastery of Rhetoric, Hermeneutics, and Logical Structure.</span>
+                            <span class="lang lang-zh">精通修辭學、詮釋學和邏輯結構。</span>
+                        </p>
                     </div>
                     
                     <div class="text-primary-dark font-bold text-2xl">+</div>
@@ -108,15 +211,31 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-secondary-gold mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                         </svg>
-                        <h3 class="text-xl font-semibold">Ingeniería de Prompts Avanzada</h3>
-                        <p class="text-sm text-gray-500">Técnicas avanzadas (CoT, Few-Shot) aplicadas con rigor lingüístico.</p>
+                        <h3 class="text-xl font-semibold">
+                            <span class="lang lang-es">Ingeniería de Prompts Avanzada</span>
+                            <span class="lang lang-en">Advanced Prompt Engineering</span>
+                            <span class="lang lang-zh">高級提示工程</span>
+                        </h3>
+                        <p class="text-sm text-gray-500">
+                            <span class="lang lang-es">Técnicas avanzadas (CoT, Few-Shot) aplicadas con rigor lingüístico.</span>
+                            <span class="lang lang-en">Advanced techniques (CoT, Few-Shot) applied with linguistic rigor.</span>
+                            <span class="lang lang-zh">以嚴謹的語言學應用先進技術 (CoT, Few-Shot)。</span>
+                        </p>
                     </div>
 
                     <div class="text-primary-dark font-bold text-2xl">=</div>
                     
                     <div class="text-center p-6 bg-primary-dark rounded-lg shadow-xl">
-                        <h3 class="text-2xl font-serif text-white">Argumentación Superior</h3>
-                        <p class="text-sm text-secondary-gold">Claridad, Precisión y Fuerza Persuasiva.</p>
+                        <h3 class="text-2xl font-serif text-white">
+                            <span class="lang lang-es">Argumentación Superior</span>
+                            <span class="lang lang-en">Superior Argumentation</span>
+                            <span class="lang lang-zh">卓越的論證</span>
+                        </h3>
+                        <p class="text-sm text-secondary-gold">
+                            <span class="lang lang-es">Claridad, Precisión y Fuerza Persuasiva.</span>
+                            <span class="lang lang-en">Clarity, Precision, and Persuasive Force.</span>
+                            <span class="lang lang-zh">清晰、精準、有說服力。</span>
+                        </p>
                     </div>
                 </div>
                 
@@ -125,22 +244,50 @@
 
         <section id="services" class="py-20 bg-neutral-light">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-serif font-bold text-center mb-12 text-primary-dark">Servicios de Alto Valor</h2>
+                <h2 class="text-3xl font-serif font-bold text-center mb-12 text-primary-dark">
+                    <span class="lang lang-es">Servicios de Alto Valor</span>
+                    <span class="lang lang-en">High-Value Services</span>
+                    <span class="lang lang-zh">高價值服務</span>
+                </h2>
                 <div class="grid md:grid-cols-3 gap-8">
                     
                     <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-secondary-gold hover-lift">
-                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">Recursos de Casación y Apelación</h3>
-                        <p class="text-gray-600 mb-4">Diseño y redacción de escritos donde la calidad de la argumentación técnica prevalece. Optimización de la estructura lógica para maximizar el impacto ante Tribunales Supremos.</p>
+                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">
+                            <span class="lang lang-es">Recursos de Casación y Apelación</span>
+                            <span class="lang lang-en">Cassation and Appeals</span>
+                            <span class="lang lang-zh">上訴與抗告代理</span>
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            <span class="lang lang-es">Diseño y redacción de escritos donde la calidad de la argumentación técnica prevalece. Optimización de la estructura lógica para maximizar el impacto ante Tribunales Supremos.</span>
+                            <span class="lang lang-en">Design and drafting of briefs where the quality of technical argumentation prevails. Optimization of the logical structure to maximize impact before Supreme Courts.</span>
+                            <span class="lang lang-zh">設計和撰寫以技術論證質量為主的文書。優化邏輯結構，最大化對最高法院的影響力。</span>
+                        </p>
                     </div>
 
                     <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-secondary-gold hover-lift">
-                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">Arbitraje Internacional</h3>
-                        <p class="text-gray-600 mb-4">Construcción de argumentarios claros y precisos, cruciales en entornos donde confluyen distintas tradiciones jurídicas. Refinamiento del lenguaje para evitar ambigüedades interpretativas.</p>
+                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">
+                            <span class="lang lang-es">Arbitraje Internacional</span>
+                            <span class="lang lang-en">International Arbitration</span>
+                            <span class="lang lang-zh">國際仲裁</span>
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            <span class="lang lang-es">Construcción de argumentarios claros y precisos, cruciales en entornos donde confluyen distintas tradiciones jurídicas. Refinamiento del lenguaje para evitar ambigüedades interpretativas.</span>
+                            <span class="lang lang-en">Construction of clear and precise arguments, crucial in environments where different legal traditions converge. Refinement of language to avoid interpretive ambiguities.</span>
+                            <span class="lang lang-zh">構建清晰精準的論點，這在不同法律傳統交匯的環境中至關重要。精煉語言以避免解釋上的歧義。</span>
+                        </p>
                     </div>
 
                     <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-secondary-gold hover-lift">
-                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">Litigios "Bet-the-Company"</h3>
-                        <p class="text-gray-600 mb-4">Soporte estratégico en casos de alto riesgo financiero. Identificación de debilidades lógicas (falacias) en los argumentos de la parte contraria y blindaje de la posición propia.</p>
+                        <h3 class="text-xl font-semibold mb-4 text-primary-dark">
+                            <span class="lang lang-es">Litigios "Bet-the-Company"</span>
+                            <span class="lang lang-en">"Bet-the-Company" Litigation</span>
+                            <span class="lang lang-zh">「公司命運」訴訟</span>
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            <span class="lang lang-es">Soporte estratégico en casos de alto riesgo financiero. Identificación de debilidades lógicas (falacias) en los argumentos de la parte contraria y blindaje de la posición propia.</span>
+                            <span class="lang lang-en">Strategic support in high financial risk cases. Identification of logical weaknesses (fallacies) in the opposing party's arguments and shielding of one's own position.</span>
+                            <span class="lang lang-zh">在高財務風險案件中提供戰略支持。識別對方論點中的邏輯弱點（謬誤）並鞏固己方立場。</span>
+                        </p>
                     </div>
 
                 </div>
@@ -149,47 +296,83 @@
 
         <section id="methodology" class="py-20 bg-white">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-serif font-bold text-center mb-12 text-primary-dark">Nuestra Metodología: Colaboración Tripartita</h2>
+                <h2 class="text-3xl font-serif font-bold text-center mb-12 text-primary-dark">
+                    <span class="lang lang-es">Nuestra Metodología: Colaboración Tripartita</span>
+                    <span class="lang lang-en">Our Methodology: Tripartite Collaboration</span>
+                    <span class="lang lang-zh">我們的方法論：三方協作</span>
+                </h2>
                 
                 <div class="relative">
                     <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200"></div>
 
                     <div class="flex flex-col md:flex-row items-center mb-8">
                         <div class="w-full md:w-1/2 md:pr-8 text-left md:text-right mb-4 md:mb-0">
-                            <h3 class="text-xl font-semibold text-primary-dark">1. Estrategia Jurídica</h3>
-                            <p class="text-gray-600">El Abogado (Experto Jurídico) define la estrategia legal, los hechos clave y la jurisprudencia aplicable.</p>
+                            <h3 class="text-xl font-semibold text-primary-dark">
+                                <span class="lang lang-es">1. Estrategia Jurídica</span>
+                                <span class="lang lang-en">1. Legal Strategy</span>
+                                <span class="lang lang-zh">1. 法律策略</span>
+                            </h3>
+                            <p class="text-gray-600">
+                                <span class="lang lang-es">El Abogado (Experto Jurídico) define la estrategia legal, los hechos clave y la jurisprudencia aplicable.</span>
+                                <span class="lang lang-en">The Lawyer (Legal Expert) defines the legal strategy, key facts, and applicable jurisprudence.</span>
+                                <span class="lang lang-zh">律師（法律專家）定義法律策略、關鍵事實和適用的判例法。</span>
+                            </p>
                         </div>
-                        <div class="w-full md:w-1/2 md:pl-8">
+                        <div class="w-full md:w-1/2 md:pl-8 flex justify-start">
                             <div class="bg-secondary-gold p-4 rounded-full h-12 w-12 flex items-center justify-center text-white font-bold shadow-lg">1</div>
                         </div>
                     </div>
 
                     <div class="flex flex-col md:flex-row items-center mb-8 md:flex-row-reverse">
                         <div class="w-full md:w-1/2 md:pl-8 text-left mb-4 md:mb-0">
-                            <h3 class="text-xl font-semibold text-primary-dark">2. Arquitectura Retórica</h3>
-                            <p class="text-gray-600">El Ingeniero Retórico (Filólogo) traduce la estrategia en una estructura argumentativa óptima (Dispositio) y diseña la secuencia de prompts avanzada.</p>
+                            <h3 class="text-xl font-semibold text-primary-dark">
+                                <span class="lang lang-es">2. Arquitectura Retórica</span>
+                                <span class="lang lang-en">2. Rhetorical Architecture</span>
+                                <span class="lang lang-zh">2. 修辭架構</span>
+                            </h3>
+                            <p class="text-gray-600">
+                                <span class="lang lang-es">El Ingeniero Retórico (Filólogo) traduce la estrategia en una estructura argumentativa óptima (Dispositio) y diseña la secuencia de prompts avanzada.</span>
+                                <span class="lang lang-en">The Rhetorical Engineer (Philologist) translates the strategy into an optimal argumentative structure (Dispositio) and designs the advanced prompt sequence.</span>
+                                <span class="lang lang-zh">修辭工程師（語言學家）將策略轉化為最佳論證結構（Dispositio），並設計高級提示序列。</span>
+                            </p>
                         </div>
-                        <div class="w-full md:w-1/2 md:pr-8">
+                        <div class="w-full md:w-1/2 md:pr-8 flex justify-start md:justify-end">
                             <div class="bg-secondary-gold p-4 rounded-full h-12 w-12 flex items-center justify-center text-white font-bold shadow-lg">2</div>
                         </div>
                     </div>
 
                     <div class="flex flex-col md:flex-row items-center mb-8">
                         <div class="w-full md:w-1/2 md:pr-8 text-left md:text-right mb-4 md:mb-0">
-                            <h3 class="text-xl font-semibold text-primary-dark">3. Ejecución y Refinamiento</h3>
-                            <p class="text-gray-600">La IA (Motor de Ejecución) genera los borradores. El Ingeniero Retórico refina el lenguaje (Elocutio) para maximizar la fuerza persuasiva (Logos, Ethos, Pathos).</p>
+                            <h3 class="text-xl font-semibold text-primary-dark">
+                                <span class="lang lang-es">3. Ejecución y Refinamiento</span>
+                                <span class="lang lang-en">3. Execution and Refinement</span>
+                                <span class="lang lang-zh">3. 執行與精煉</span>
+                            </h3>
+                            <p class="text-gray-600">
+                                <span class="lang lang-es">La IA (Motor de Ejecución) genera los borradores. El Ingeniero Retórico refina el lenguaje (Elocutio) para maximizar la fuerza persuasiva (Logos, Ethos, Pathos).</span>
+                                <span class="lang lang-en">The AI (Execution Engine) generates the drafts. The Rhetorical Engineer refines the language (Elocutio) to maximize persuasive force (Logos, Ethos, Pathos).</span>
+                                <span class="lang lang-zh">AI（執行引擎）生成草稿。修辭工程師精煉語言（Elocutio），以最大化說服力（Logos, Ethos, Pathos）。</span>
+                            </p>
                         </div>
-                        <div class="w-full md:w-1/2 md:pl-8">
+                        <div class="w-full md:w-1/2 md:pl-8 flex justify-start">
                             <div class="bg-secondary-gold p-4 rounded-full h-12 w-12 flex items-center justify-center text-white font-bold shadow-lg">3</div>
                         </div>
                     </div>
                     
-                     <div class="flex flex-col md:flex-row items-center mb-8 md:flex-row-reverse">
+                    <div class="flex flex-col md:flex-row items-center mb-8 md:flex-row-reverse">
                         <div class="w-full md:w-1/2 md:pl-8 text-left mb-4 md:mb-0">
-                            <h3 class="text-xl font-semibold text-primary-dark">4. Validación Legal</h3>
-                            <p class="text-gray-600">El Abogado valida la exactitud jurídica y la alineación estratégica del resultado final.</p>
+                            <h3 class="text-xl font-semibold text-primary-dark">
+                                <span class="lang lang-es">4. Validación Legal</span>
+                                <span class="lang lang-en">4. Legal Validation</span>
+                                <span class="lang lang-zh">4. 法律驗證</span>
+                            </h3>
+                            <p class="text-gray-600">
+                                <span class="lang lang-es">El Abogado valida la exactitud jurídica y la alineación estratégica del resultado final.</span>
+                                <span class="lang lang-en">The Lawyer validates the legal accuracy and strategic alignment of the final result.</span>
+                                <span class="lang lang-zh">律師驗證最終結果的法律準確性和戰略一致性。</span>
+                            </p>
                         </div>
-                        <div class="w-full md:w-1/2 md:pr-8">
+                        <div class="w-full md:w-1/2 md:pr-8 flex justify-start md:justify-end">
                             <div class="bg-secondary-gold p-4 rounded-full h-12 w-12 flex items-center justify-center text-white font-bold shadow-lg">4</div>
                         </div>
                     </div>
@@ -199,12 +382,20 @@
 
         <section id="contact" class="bg-primary-dark py-20">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-serif font-bold text-white mb-6">Obtenga una Ventaja Decisiva</h2>
+                <h2 class="text-3xl font-serif font-bold text-white mb-6">
+                    <span class="lang lang-es">Obtenga una Ventaja Decisiva</span>
+                    <span class="lang lang-en">Gain a Decisive Advantage</span>
+                    <span class="lang lang-zh">獲得決定性優勢</span>
+                </h2>
                 <p class="text-gray-300 mb-8">
-                    No confíe la argumentación de sus casos más críticos a herramientas genéricas. Descubra el poder de la Ingeniería Retórica.
+                    <span class="lang lang-es">No confíe la argumentación de sus casos más críticos a herramientas genéricas. Descubra el poder de la Ingeniería Retórica.</span>
+                    <span class="lang lang-en">Do not entrust the argumentation of your most critical cases to generic tools. Discover the power of Rhetorical Engineering.</span>
+                    <span class="lang lang-zh">不要將您最關鍵案件的論證委託給通用工具。發現修辭工程學的力量。</span>
                 </p>
                 <a href="mailto:caramessanchez@hotmail.com" class="bg-secondary-gold text-primary-dark px-8 py-4 rounded-full font-semibold text-lg hover:bg-opacity-90 transition duration-300">
-                    Programar Consulta Confidencial
+                    <span class="lang lang-es">Programar Consulta Confidencial</span>
+                    <span class="lang lang-en">Schedule Confidential Consultation</span>
+                    <span class="lang lang-zh">安排機密諮詢</span>
                 </a>
             </div>
         </section>
@@ -212,10 +403,45 @@
 
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-6 text-center">
-            <p class="mb-4">&copy; 2025 AI Rhetorica. Todos los derechos reservados.</p>
-            <p class="text-sm text-gray-500">Servicios de consultoría estratégica y lingüística. No constituimos asesoramiento legal.</p>
+            <p class="mb-4">
+                <span class="lang lang-es">&copy; 2025 AI Rhetorica. Todos los derechos reservados.</span>
+                <span class="lang lang-en">&copy; 2025 AI Rhetorica. All rights reserved.</span>
+                <span class="lang lang-zh">&copy; 2025 AI Rhetorica. 版權所有。</span>
+            </p>
+            <p class="text-sm text-gray-500">
+                <span class="lang lang-es">Servicios de consultoría estratégica y lingüística. No constituimos asesoramiento legal.</span>
+                <span class="lang lang-en">Strategic and linguistic consulting services. We do not constitute legal advice.</span>
+                <span class="lang lang-zh">戰略和語言諮詢服務。我們不提供法律建議。</span>
+            </p>
         </div>
     </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            // 1. Update the body class (this triggers the CSS display change)
+            document.body.classList.remove('lang-active-es', 'lang-active-en', 'lang-active-zh');
+            document.body.classList.add('lang-active-' + lang);
+            
+            // 2. Update the HTML lang attribute (important for SEO/Accessibility)
+            // Use zh-Hant for Traditional Chinese
+            const htmlLang = (lang === 'zh') ? 'zh-Hant' : lang;
+            document.documentElement.lang = htmlLang;
+
+            // 3. Update active button style
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            // 4. Save the preference in localStorage
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Initialize the language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Use Spanish ('es') as default if no preference is saved
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'es';
+            switchLanguage(preferredLanguage);
+        });
+    </script>
 
 </body>
 </html>
